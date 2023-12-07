@@ -1,0 +1,5 @@
+A análise do ECG encontra-se no ficheiro ecgpacientes.m enquanto que a análise do GSR e do BR encontram-se no ficheiro GSR_BR.m . A separação deveu-se a tornar o código menos massivo. Também possuímos a interface gráfica no ficheiro gui.m . 
+Apresentamos também um ficheiro excel como exemplo de como retiramos as amostras para cada video.
+Além disso possuímos os biosinais nos ficheiros "Bitalino..." e ainda os ficheiros triggers onde se encontra os momentos em que ocorreram cada vídeo. 
+O resto são as funções e filtros que nós utilizamos !
+Cumprimentos!
