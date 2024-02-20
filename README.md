@@ -24,7 +24,7 @@ The ECG records electrical activity in the heart. It's crucial for diagnosing ca
 
 <img width="768" alt="ecg" src="https://github.com/rubensilvab/Detection-of-Anxiety-Levels-in-Patients-with-Arachnophobia-Through-Biosignals/assets/130314085/6d462977-9e3d-4dcf-b70c-4c1aa6e83a34">
 
-***Figure 1**- Electrocardiogram*
+***Figure 1**- Electrocardiogram and the wave shapes.*
 
 #### Application of the Pan-Tompkins Algorithm Block
 
