@@ -2,7 +2,8 @@
 
 ## Motivation
 
-Soren Kierkegaard's "The Concept of Anxiety" laid the groundwork for understanding anxiety in the 19th century. Initially viewed as a positive impulse towards ethical choices, anxiety is now recognized as a natural response to stress. However, excessive and prolonged anxiety can lead to disorders, prevalent in Portugal and worldwide. Arachnophobia, an irrational fear of spiders, is one such anxiety disorder. Symptoms include increased heart rate, sweating, trembling, and difficulty breathing. Treatment often involves exposure therapy, gradually exposing patients to feared objects. Our study focuses on monitoring anxiety levels during exposure therapy sessions for arachnophobia patients, using biosignals like ECG, GSR, and BR. 
+Soren Kierkegaard's "The Concept of Anxiety" laid the groundwork for understanding anxiety in the 19th century. Initially viewed as a positive impulse towards ethical choices, anxiety is now recognized as a natural response to stress. However, excessive and prolonged anxiety can lead to disorders, prevalent in Portugal and worldwide. Arachnophobia, an irrational fear of spiders, is one such anxiety disorder. Symptoms include increased heart rate, sweating, trembling, and difficulty breathing. Treatment often involves exposure therapy, gradually exposing patients to feared objects. Our study focuses on monitoring anxiety levels during exposure therapy sessions for arachnophobia patients, using biosignals like ECG, GSR, and BR. Main code: [ecgpacientes](Project/ecgpacientes.m).
+ 
 
 ## Goals
 
@@ -28,23 +29,24 @@ The ECG records electrical activity in the heart. It's crucial for diagnosing ca
 
 #### Application of the Pan-Tompkins Algorithm Block
 
-To extract BPM and HRV, we apply the Pan-Tompkins algorithm. This algorithm enhances the QRS complex to facilitate signal analysis and extract the aforementioned information. It consists of a cascade of filters, where the output of each filter serves as the input to the next filter.
+To extract BPM and HRV, we apply the Pan-Tompkins algorithm. This algorithm enhances the QRS complex to facilitate signal analysis and extract the aforementioned information. It consists of a cascade of filters, where the output of each filter serves as the input to the next filter. Code: [Pan_Tompkins](Project/filters/Pan_TompkinsDIF.m).
+
 
 <img width="1080" alt="pantomp" src="https://github.com/rubensilvab/Detection-of-Anxiety-Levels-in-Patients-with-Arachnophobia-Through-Biosignals/assets/130314085/a8a5cb27-7187-4e34-8851-d77543af846d">
 
-***Figure 2**- Pan.Tompkins Algorithm*
+***Figure 2**- Pan Tompkins Algorithm*
 
 It consists of a cascade of filters, as detailed below:
 
 - Low Pass Filter
 
-The filter has a cutoff frequency of approximately 11 Hz and eliminates higher frequencies. However, it was designed for a signal sampled at a frequency of 200 Hz. This filter is of order 100 and has the same cutoff frequency as the previous transfer function. Code: [pre_process.m](Project/filters/Passa_Baixo_ecg.m).
+The filter has a cutoff frequency of approximately 11 Hz and eliminates higher frequencies. However, it was designed for a signal sampled at a frequency of 200 Hz. This filter is of order 100 and has the same cutoff frequency as the previous transfer function. Code: [Passa_Baixo_ecg](Project/filters/Passa_Baixo_ecg.m).
 
 <img width="1160" alt="hlow" src="https://github.com/rubensilvab/Detection-of-Anxiety-Levels-in-Patients-with-Arachnophobia-Through-Biosignals/assets/130314085/e561bdf9-8739-4202-9661-ada52a9c7988">
 
 - High Pass Filter
 
-This filter has a cutoff frequency of around 5 Hz and will cut off all frequencies below 5 Hz. By cascading these filters, we effectively create a bandpass [5-11] Hz, removing frequencies outside this range. This cascade development is beneficial as it reduces the influence of various interferences such as cardiac muscle, 60 Hz electrical network interference, or T-wave interference.
+This filter has a cutoff frequency of around 5 Hz and will cut off all frequencies below 5 Hz. By cascading these filters, we effectively create a bandpass [5-11] Hz, removing frequencies outside this range. This cascade development is beneficial as it reduces the influence of various interferences such as cardiac muscle, 60 Hz electrical network interference, or T-wave interference. Code: [Passa_Alto_ecg](Project/filters/Passa_Alto_ecg_ord100.m).
 
 <img width="1172" alt="hhigh" src="https://github.com/rubensilvab/Detection-of-Anxiety-Levels-in-Patients-with-Arachnophobia-Through-Biosignals/assets/130314085/ce0670e9-5642-42d3-88d6-df9496b55637">
 
