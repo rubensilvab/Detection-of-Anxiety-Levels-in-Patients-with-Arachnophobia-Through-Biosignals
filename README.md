@@ -26,7 +26,7 @@ The ECG records electrical activity in the heart. It's crucial for diagnosing ca
 
 ***Figure 1**- Electrocardiogram*
 
-### Application of the Pan-Tompkins Algorithm Block
+#### Application of the Pan-Tompkins Algorithm Block
 
 To extract BPM and HRV, we apply the Pan-Tompkins algorithm. This algorithm enhances the QRS complex to facilitate signal analysis and extract the aforementioned information. It consists of a cascade of filters, where the output of each filter serves as the input to the next filter.
 
@@ -63,5 +63,52 @@ After differentiation, we square the resulting signal to make it all positive an
 Finally, we performed the average of N consecutive samples along the obtained signal to obtain information about the waveform together with the slope of the R wave. The window corresponding to N samples must have a length equivalent to the QRS complex (150 ms). With our sampling frequency of 100 Hz, we empirically obtained the value of N=15.
 
 <img width="1184" alt="moviav" src="https://github.com/rubensilvab/Detection-of-Anxiety-Levels-in-Patients-with-Arachnophobia-Through-Biosignals/assets/130314085/9bbcbf89-b538-4f14-8223-0bd252f0a6cc">
+
+#### Calculating the Heart Rate in Beats Per Minute (BPM) and Heart Variability (HRV)
+
+The Pan-Tompkins algorithm successfully enhanced the QRS complex, particularly the R peaks. The findpeaks command detected local maxima, ensuring a minimum distance of 60 samples for patient 3 and 50 for patient 9 to isolate R peaks. Using the peak coordinates, BPM was computed by dividing the total R peaks by their duration in seconds and multiplying by 60. Figure 4 in the appendix illustrates peak detection. HRV, the temporal variation between consecutive R peaks, is calculated by organizing peak times into a matrix and computing the average of their temporal differences.
+
+<img width="1232" alt="picosr" src="https://github.com/rubensilvab/Detection-of-Anxiety-Levels-in-Patients-with-Arachnophobia-Through-Biosignals/assets/130314085/d79c42d2-6fda-4af8-ba08-4a1f058b35de">
+
+***Figure 2**- Peak detection for BPM and HRV calculation for patient 3 in video #5.*
+
+### Galvanic Skin Response (GSR)
+
+GSR refers to skin galvanic response, indicating changes in sweat gland activity, which in turn reflects the intensity of our emotional state, known as emotional arousal. The GSR signal does not represent the type of emotion, but its intensity. Significant changes in GSR activity in response to a stimulus are known as GSR peaks. In the GSR extracted from each patient and characteristic of each video clip, calculating the number of GSR peaks and the average of their values (in uS) is of interest.
+
+Before calculating the average GSR peaks and the number of peaks, it is necessary to apply a filter to remove high-frequency noise. The filter used is a second-order Butterworth low-pass filter with a cutoff frequency of 1.5 Hz. The selected order aims to provide optimal signal filtering and protection, based on the literature review conducted by us.
+
+### Breathing rate (BR)
+
+Breathing can also be affected by emotional stimuli and is known as an excellent indicator of anxiety. BR is simply the number of respiratory movements made by an individual per minute. We opted to evaluate the deflection of the piezoelectric sensor integrated into the wearable device and placed on the patient's chest. The higher the absolute value of the BR, the greater the chest deflection movement. We applied a bandpass filter, with cutoff frequencies of 0.1Hz-24 Hz, to eliminate high-frequency noise from the signal.
+
+After filtering, we detect maximum BR peaks and their corresponding percentage values. Summing these peaks from each video clip reveals the patient's chest movements for breathing, indicating respiratory effort. This analysis across all clips allows comparison of respiratory effort, reflecting anxiety levels.
+
+### Graphical Interface (GUI)
+
+In order to facilitate visualization of anxiety levels for each patient and video clip, we created a graphical user interface (GUI) for each patient. This GUI allows visualization of processed ECG, GSR, and BR plots for each video clip, as well as displaying the average heart rate, average GSR peak values, and maximum BR value.
+
+<img width="1218" alt="GUI" src="https://github.com/rubensilvab/Detection-of-Anxiety-Levels-in-Patients-with-Arachnophobia-Through-Biosignals/assets/130314085/083223da-ddd5-48f5-be45-55aaea3b009e">
+
+***Figure 3**- Graphical interface for visualization of biosignals and presentation of extracted values.*
+
+## Results
+In addition to the GUI, our analysis was based on a stem plot, where the y-axis represents the values obtained for average heart rate, the mean of GSR peak values, and the maximum BR value, and the x-axis denotes the video clip numbers, with video clip 0 corresponding to the demonstration clip.
+
+<img width="1089" alt="stem1" src="https://github.com/rubensilvab/Detection-of-Anxiety-Levels-in-Patients-with-Arachnophobia-Through-Biosignals/assets/130314085/b32489b0-d8fe-4a5b-b359-946b1906158f">
+
+<img width="1061" alt="stem2" src="https://github.com/rubensilvab/Detection-of-Anxiety-Levels-in-Patients-with-Arachnophobia-Through-Biosignals/assets/130314085/811182c0-ba4a-4bc3-a942-7caa388c1b84">
+
+***Figure 4**- Values for BPM, maximum GRS, and maximum BR for Patient 9 and Patient 3.*
+
+Analyzing the GUI and stem plot for patient 3, video clip 5 induced the highest heart rate, HRV, GSR peak, skin conductance level, and BR peak. Thus, it was the most anxiety-inducing. Some other clips also showed increased variables compared to the reference, indicating moderate anxiety levels, like in clip 6. Surprisingly, clip 0 (demonstration) didn't have the lowest values, possibly due to patient nervousness.
+
+Patient 9's results were inconclusive, lacking a clear peak across the calculated values compared to the reference level (assumed near the values of video clip 0, the demonstration). However, video clip 16 appeared to contribute most to patient 9's anxiety, with video clip 5 inducing an intermediate level. Patient 9 exhibited higher anxiety levels than patient 3, with significantly higher BPM and more frequent BR fluctuations.
+
+## Conclusion
+
+In summary, with this work, we were able to study and monitor the psychophysiological response of two patients with arachnophobia throughout an exposure therapy session, through the processing of ECGs, GSRs, and BRs in Matlab. Both patients still exhibit a weak ability to control their anxiety levels when confronted with spiders, indicating the need for further medical assistance and more exposure therapy sessions, or alternative forms of treatment. We also concluded that, for Patient 3, video clip 5 was the most anxiety-inducing, while for Patient 9, video clip 16 was the most anxiety-inducing. Thus, we acknowledge the subjectivity of fear perception among the patients under study and the potential errors in the proposed methodology, which may interfere with the expected outcome of identifying a single, most disturbing video clip.
+
+
 
 
